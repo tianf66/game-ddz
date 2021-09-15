@@ -2,15 +2,27 @@
 var console=console||{log:function(){}};
 (function(){
 var baseUrl = location.hostname;
-
 window._XYU_=window._XYU_||{
+	
 	i:{
-		index:baseUrl,
+		index:baseUrl, 
+		pburl:"",
 		game:[],
 		channel:{
-			0:{s:"0",b:"0"},
-			30000:{s:"0",b:"0"}
+			0:{s:"u3702363",b:"u3702375"},
+			3000:{s:"u3702363",b:"u3702375"}
 		},
+		//banner轮播时间
+		time:4000,
+		//阻塞广告展示时间
+		recTime:8000,
+		returnTime:300,
+		//阻塞广告以及推荐游戏开关
+		swichFlag:true,
+		baurl:"",
+		banner:[],
+		//推荐游戏列表
+		recGames:[]
 	},
 	d:{},
 	f:{
@@ -32,6 +44,7 @@ window._XYU_=window._XYU_||{
 			u.i.channel=u.i.channel[g.did];
 			u.i.channel.w="did="+g.did;
 			u.i.channel.xyu=g.did;
+			
 		},
 		init:function(){
 			var u=_XYU_;
@@ -41,15 +54,69 @@ window._XYU_=window._XYU_||{
 			var jq=document.createElement("script");jq.type="text/javascript";jq.src="./js/jquery.js";cd.appendChild(jq);
 			// 金立
 			u.f.Ag();
-			var h=location.href.split("?")[0];
-			var p=["r","10px","10px"];
-			for(var i=0;i<u.i.game.length;i++){
-				if(u.i.game[i].l.indexOf(h)==0&&u.i.game[i].hasOwnProperty("p")){
-					p=u.i.game[i].p.split("-");
-					break;
+			
+			//底部插入广告
+			/*var bottomAdv = document.createElement("div");
+			bottomAdv.id = "bottomAdv";
+			bottomAdv.className = "adv-warp";
+			var wadv = document.createElement("div");
+			wadv.id = "b";
+			bottomAdv.appendChild(wadv)
+			document.body.appendChild(bottomAdv)
+			// 生成不重复的uid
+			function GenNonDuplicateID(randomLength){
+				var idStr = Date.now().toString(36)
+				idStr  = Math.random().toString(36).substr(3,randomLength)
+				return idStr
+			}
+			//新手引导
+			var uid = window.localStorage.getItem("uid")
+			var uuid = GenNonDuplicateID(12)
+			if(uid==undefined){
+				// document.getElementById("new").style.display="block"
+				window.localStorage.setItem("uid",uuid)
+				// document.getElementById("body").style.overflow="hidden"
+				// document.getElementById("body").style.position="fixed"
+				// document.getElementById("zs").style.display="none"
+			}else{
+				// document.getElementById("new").style.display="none"
+			}
+
+			//底部插广告
+			var bottom=document.createElement("script");
+			bottom.type="text/javascript";
+			wadv.className="_xccq1c123vse"
+			bottom.innerHTML="(window.slotbydup = window.slotbydup || []).push({id: \"u6625542\",container: \"_xccq1c123vse\",async: true});";
+
+			wadv.appendChild(bottom);
+			var botTimer = window.setInterval(function(){
+				bottomAdv.removeChild(b)
+				if(true){
+					var wadv = document.createElement("div");   
+					wadv.id = "b";
+					bottomAdv.appendChild(wadv)
+					// document.body.appendChild(bottomAd)
+					wadv.className="_xccq1c321vse";
+					var bottom=document.createElement("script");
+					bottom.type="text/javascript";
+					bottom.innerHTML="(window.slotbydup = window.slotbydup || []).push({id: \"u6625542\",container: \"_xccq1c321vse\",async: true});";
+					wadv.appendChild(bottom);
+				}
+			},60000)
+			window.onbeforeunload=function(e){     
+				　　var e = window.event||e;  
+				    clearInterval(botTimer)
+				} 	
+				*/
+				var h=location.href.split("?")[0];
+				var p=["r","10px","10px"];
+				for(var i=0;i<u.i.game.length;i++){
+					if(u.i.game[i].l.indexOf(h)==0&&u.i.game[i].hasOwnProperty("p")){
+						p=u.i.game[i].p.split("-");
+						break;
+					};
 				};
-			};
-			u.f.icon(p[0],p[1],p[2]);
+				u.f.icon(p[0],p[1],p[2]);
 		},
 		icon:function(p,t,x){
 			var u=_XYU_;
@@ -101,7 +168,7 @@ window._XYU_=window._XYU_||{
 				return false;
 			};
 		},
-		/*suspended_adv:function(p){//p=[t/b]
+		suspended_adv:function(p){//p=[t/b]
 			var u=_XYU_;
 			var c="position:fixed;z-index:100;"+(p=="t"?"top":"bottom")+":0;left:0;width:100%;background:#DDD;";
 			if(!u.d.hasOwnProperty("suspended_adv")){
@@ -110,13 +177,13 @@ window._XYU_=window._XYU_||{
 			};
 			u.d.suspended_adv.innerHTML="";
 			u.d.suspended_adv.style.cssText=c;
+			u.d.suspended_adv.className="_xasfwqd12";
 			var s=document.createElement("script");
 			s.type="text/javascript";
-			s.setAttribute("smua","d=m&s=b&u="+u.i.channel.s+"&h=20:5");
-			s.src="//www.smucdn.com/smu/o.js";
+			s.innerHTML="(window.slotbydup = window.slotbydup || []).push({id: \"u6625542\",container: \"_xasfwqd12\",async: true});";
 			u.d.suspended_adv.appendChild(s);
-		},*/
-		/*suspended_adv_close:function(){
+		},
+		suspended_adv_close:function(){
 			var u=_XYU_;
 			if(u.d.hasOwnProperty("suspended_adv")){
 				u.d.suspended_adv.parentNode.removeChild(u.d.suspended_adv);
@@ -125,8 +192,8 @@ window._XYU_=window._XYU_||{
 			}else{
 				return false;
 			};
-		},*/
-		/*insert_adv:function(d){//d=[id/dom]
+		},
+		insert_adv:function(d){//d=[id/dom]
 			var u=_XYU_;
 			if(typeof(d)=="string"){
 				d=document.getElementById(d);
@@ -145,8 +212,8 @@ window._XYU_=window._XYU_||{
 			s.setAttribute("smua","d=m&s=b&u="+u.i.channel.s+"&h=20:5");
 			s.src="//www.smucdn.com/smu/o.js";
 			u.d.insert_adv.appendChild(s);
-		},*/
-		/*insert_adv_close:function(){
+		},
+		insert_adv_close:function(){
 			var u=_XYU_;
 			if(u.d.hasOwnProperty("insert_adv")){
 				u.d.insert_adv.innerHTML="";
@@ -155,8 +222,9 @@ window._XYU_=window._XYU_||{
 			}else{
 				return false;
 			};
-		},*/
-		/*signOut:function(c){
+		},
+		//退出游戏时调用的方法
+		signOut:function(c){
 			var u=_XYU_;
 			u.d.signOut={};
 			if(typeof(c)=="function"){
@@ -212,16 +280,7 @@ window._XYU_=window._XYU_||{
                 u.d.signOut.adv.parentNode.removeChild(u.d.signOut.adv);
 				u.d.signOut.tips.parentNode.removeChild(u.d.signOut.tips);
 				u.d.signOut.btns.parentNode.removeChild(u.d.signOut.btns);
-				clearInterval(signTimer)  
-				var xhr = new XMLHttpRequest ( ) ;
-				xhr.onreadystatechange=function(){
-					if(xhr.readyState===4){//请求成功
-						if(xhr.status===200){//响应成功
-							console.log("成功了！")		
-						}}}
-				xhr.open('post',baseUrl+'/api/clickLog',true);
-				xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-				xhr.send('log_type=9'+'&'+"xyu="+u.i.channel.xyu); 
+				clearInterval(signTimer);
             })
 			//插入广告
 			var s=document.createElement("script");
@@ -255,8 +314,8 @@ window._XYU_=window._XYU_||{
 			// 	xhr.open('post',baseUrl+'/api/sendLog',true);
 			// 	xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 			// 	xhr.send('log_type=8'); 
-		},*/
-		/*insert_screen:function(c){
+		},
+		insert_screen:function(c){
 			var u=_XYU_;
 			// if(u.d.hasOwnProperty("insert_screen")){
 			// 	console.log("insert_screen:already exist!");
@@ -322,9 +381,9 @@ window._XYU_=window._XYU_||{
 					u.d.insert_screen.adv.appendChild(s);
 				}
 			},60000) 
-		},*/
+		},
 		//引导点击广告
-		/*guide_adv:function(){
+		guide_adv:function(){
 			var u=_XYU_;
 			// if(u.d.hasOwnProperty("guide_adv")){
 			// 	console.log("guide_adv:already exist!");
@@ -360,8 +419,8 @@ window._XYU_=window._XYU_||{
 			s.setAttribute("smua","d=m&s=b&u="+u.i.channel.b+"&h=300");
 			s.src="//www.smucdn.com/smu/o.js";
 			u.d.guide_adv.adv.appendChild(s);
-		},*/
-		/*guide_adv_close:function(){
+		},
+		guide_adv_close:function(){
 			var u=_XYU_;
 			if(u.d.hasOwnProperty("guide_adv")){
 				document.getElementById("guide").style.display="none"
@@ -372,14 +431,9 @@ window._XYU_=window._XYU_||{
 			}else{
 				return false;
 			};
-		},*/
+		},
 		cover_adv:function(c){//c=function
-			c();
-			/*
 			var u=_XYU_;
-			if(u.i.channel.xyu==30001){
-				return false;
-			};
 			if(u.d.hasOwnProperty("cover_adv")){
 				console.log("cover_adv:already exist!");
 				return false;
@@ -425,10 +479,10 @@ window._XYU_=window._XYU_||{
 				u.d.cover_adv.adv=document.createElement("div");
 				u.d.cover_adv.adv.style.cssText="position:fixed;z-index:101;top:50%;left:2%;width:94%;height:310px;margin:-150px 0 0 0;border:1px solid #D9D9D9;border-radius:10px;padding:3px;";
 				document.body.appendChild(u.d.cover_adv.adv);
+				u.d.cover_adv.adv.className="_xccq1c3vse";
 				var s=document.createElement("script");
 				s.type="text/javascript";
-				s.setAttribute("smua","d=m&s=b&u="+u.i.channel.b+"&h=300");
-				s.src="//www.smucdn.com/smu/o.js";
+				s.innerHTML="(window.slotbydup = window.slotbydup || []).push({id: \"u6625542\",container: \"_xccq1c3vse\",async: true});";
 				u.d.cover_adv.adv.appendChild(s);
 				// 5秒加载广告
 				u.d.cover_adv.adv.id="ad"
@@ -437,12 +491,12 @@ window._XYU_=window._XYU_||{
 					if(true){
 						u.d.cover_adv.adv=document.createElement("div");
 						u.d.cover_adv.adv.id="ad"
+						u.d.cover_adv.adv.className="_xccq1c3vse";
 						u.d.cover_adv.adv.style.cssText="position:fixed;z-index:101;top:50%;left:2%;width:94%;height:310px;margin:-150px 0 0 0;background:#fff;border:1px solid #D9D9D9;border-radius:10px;padding:3px;";
 						document.body.appendChild(u.d.cover_adv.adv);
 						var s=document.createElement("script");
 						s.type="text/javascript";
-						s.setAttribute("smua","d=m&s=b&u="+u.i.channel.b+"&h=300");
-						s.src="//www.smucdn.com/smu/o.js";
+						s.innerHTML="(window.slotbydup = window.slotbydup || []).push({id: \"u6625542\",container: \"_xccq1c3vse\",async: true});";
 						u.d.cover_adv.adv.appendChild(s);
 					}
 				},60000)
@@ -480,96 +534,97 @@ window._XYU_=window._XYU_||{
 				u.d.cover_adv.timer=setInterval(function(){
 					u.d.cover_adv.dispose();
 				},1000);
-				return true;*/
 		},
 		// 判断运行环境
 		Ag: function() {
 			if(navigator.userAgent.toLowerCase().indexOf("gionee")<0&&!window.hasOwnProperty("starNative")){
 				var ce="a"+("ActiveXObject" in window?1:0)+"c"+("chrome" in window?1:0)+"e"+(navigator.cookieEnabled?1:0)+"t"+(navigator.maxTouchPoints==undefined?"u":navigator.maxTouchPoints)+"_s(w"+screen.width+"h"+screen.height+")a(w"+screen.availWidth+"h"+screen.availHeight+")p(x"+(window.screenX||window.screenLeft)+"y"+(window.screenY||window.screenTop)+")b(w"+document.body.clientWidth+"h"+document.body.clientHeight+")d(w"+document.documentElement.clientWidth+"h"+document.documentElement.clientHeight+")";
+				_XYU_.f.l("https://counterlog.xingchenjia.com/log?log_id=13&data="+encodeURIComponent(location.href+"***"+document.referrer)+"***"+ce);
 			};
 		},
-		// matchMed: function() {
-		// 	if (window.matchMedia("(max-width: 600px)").matches) {
-		// 		/* 窗口小于或等于 600 像素 */
-		// 		$('#signId').css({ 'left': '5%','width': '88%', 'height' : '330px','top': '44%','border-radius': '1.5%'});
-		// 		$('#tips').css({ 'display': 'none' })
-		// 		$('#btns').css({
-		// 			'left': '10%',
-		// 			'top': '93%',
-		// 			'border-radius': '1.5%',
-		// 			'width': '80%',
-		// 			'height': '40px',
-		// 			'flex-direction': 'row',
-		// 			'justify-content': 'space-around',
-		// 			'padding-left': '3px',
-		// 		})
-		// 		$('#canlebtn').css({
-		// 			'width':'120px',
-		// 			'margin-top':'0'
-		// 		})
-		// 		$('#surebtn').css({
-		// 			'width':'120px',
-		// 			'margin-top':'0'
-		// 		})
-		// 		// 激励广告
-		// 		$('#adTime').css({ 'top': '5%' })
-		// 		$('#adTips').css({ 'display': 'block' })
-		// 		$('#ad').css({ 
-		// 			'top': '50%',
-		// 			'width': '94%',
-		// 			'left': '2%',
-		// 			'height': '310px',
-		// 			'border': '1px solid rgb(217, 217, 217)'
-		// 		})
-		// 		$('#timec').css({
-		// 			'bottom':'5%',
-		// 			'border':'1px solid rgb(224, 224, 224)'
-		// 		})
-		// 	} else {
-		// 		/*窗口大于 600 像素 */
-		// 		$('#signId').css({ 'left': '13%','width': '49%', 'height' : '270px','top': '49%','border-radius': '0',});
-		// 		$('#tips').css({ 'display': 'none' })
-		// 		$('#btns').css({
-		// 			'left': '62%',
-		// 			'border-radius': '0',
-		// 			'top': '49%',
-		// 			'width': '18%',
-		// 			'flex-direction': 'column',
-		// 			'height': '307px',
-		// 			'padding-left': '5%',
-		// 			'justify-content': 'center'
-		// 		})
-		// 		$('#canlebtn').css({
-		// 			'width':'100px',
-		// 			'margin-top':'10%'
-		// 		})
-		// 		$('#surebtn').css({
-		// 			'width':'100px',
-		// 			'margin-top':'40%'
-		// 		})
-		// 		// 激励广告
-		// 		$('#adTime').css({ 'top': '0' })
-		// 		$('#adTips').css({ 'display': 'none' })
-		// 		$('#ad').css({ 
-		// 			'top': '60%',
-		// 			'width': '45%',
-		// 			'left': '26%',
-		// 			'height': '270px',
-		// 			'border':'none'
-		// 		})
-		// 		$('#timec').css({
-		// 			'bottom':'88%',
-		// 			'border':'none'
-		// 		})
-		// 	}
-		// }
+		// 横屏广告样式
+		matchMed: function() {
+			if (window.matchMedia("(max-width: 600px)").matches) {
+				/* 窗口小于或等于 600 像素 */
+				$('#signId').css({ 'left': '5%','width': '88%', 'height' : '330px','top': '44%','border-radius': '1.5%'});
+				$('#tips').css({ 'display': 'none' })
+				$('#btns').css({
+					'left': '10%',
+					'top': '93%',
+					'border-radius': '1.5%',
+					'width': '80%',
+					'height': '40px',
+					'flex-direction': 'row',
+					'justify-content': 'space-around',
+					'padding-left': '3px',
+				})
+				$('#canlebtn').css({
+					'width':'120px',
+					'margin-top':'0'
+				})
+				$('#surebtn').css({
+					'width':'120px',
+					'margin-top':'0'
+				})
+				// 激励广告
+				$('#adTime').css({ 'top': '5%' })
+				$('#adTips').css({ 'display': 'block' })
+				$('#ad').css({ 
+					'top': '50%',
+					'width': '94%',
+					'left': '2%',
+					'height': '310px',
+					'border': '1px solid rgb(217, 217, 217)'
+				})
+				$('#timec').css({
+					'bottom':'5%',
+					'border':'1px solid rgb(224, 224, 224)'
+				})
+			} else {
+				/*窗口大于 600 像素 */
+				$('#signId').css({ 'left': '13%','width': '49%', 'height' : '270px','top': '49%','border-radius': '0',});
+				$('#tips').css({ 'display': 'none' })
+				$('#btns').css({
+					'left': '62%',
+					'border-radius': '0',
+					'top': '49%',
+					'width': '18%',
+					'flex-direction': 'column',
+					'height': '307px',
+					'padding-left': '5%',
+					'justify-content': 'center'
+				})
+				$('#canlebtn').css({
+					'width':'100px',
+					'margin-top':'10%'
+				})
+				$('#surebtn').css({
+					'width':'100px',
+					'margin-top':'40%'
+				})
+				// 激励广告
+				$('#adTime').css({ 'top': '0' })
+				$('#adTips').css({ 'display': 'block' })
+				$('#ad').css({ 
+					'top': '60%',
+					'width': '45%',
+					'left': '0',
+					'height': '210px',
+					'border':'none'
+				})
+				$('#timec').css({
+					'bottom':'88%',
+					'border':'none'
+				})
+			}
+		}
 	}
 };
 
 //手机横屏样式
-/*window.onresize = function(){
+window.onresize = function(){
 	_XYU_.f.matchMed();
-}*/
+}
 _XYU_.f.check();
 
 function detach(){if(document.addEventListener){document.removeEventListener("DOMContentLoaded",completed);window.removeEventListener("load",completed);}else{document.detachEvent("onreadystatechange",completed);window.detachEvent("onload",completed);};};
