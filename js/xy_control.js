@@ -180,7 +180,7 @@ window._XYU_=window._XYU_||{
 			u.d.suspended_adv.className="_xasfwqd12";
 			var s=document.createElement("script");
 			s.type="text/javascript";
-			s.innerHTML="(window.slotbydup = window.slotbydup || []).push({id: \"u6625542\",container: \"_xasfwqd12\",async: true});";
+			s.innerHTML="(window.slotbydup = window.slotbydup || []).push({id: \"u6658271\",container: \"_xasfwqd12\",async: true});";
 			u.d.suspended_adv.appendChild(s);
 		},
 		suspended_adv_close:function(){
@@ -482,7 +482,7 @@ window._XYU_=window._XYU_||{
 				u.d.cover_adv.adv.className="_xccq1c3vse";
 				var s=document.createElement("script");
 				s.type="text/javascript";
-				s.innerHTML="(window.slotbydup = window.slotbydup || []).push({id: \"u6625542\",container: \"_xccq1c3vse\",async: true});";
+				s.innerHTML="(window.slotbydup = window.slotbydup || []).push({id: \"u6658271\",container: \"_xccq1c3vse\",async: true});";
 				u.d.cover_adv.adv.appendChild(s);
 				// 5秒加载广告
 				u.d.cover_adv.adv.id="ad"
@@ -496,7 +496,7 @@ window._XYU_=window._XYU_||{
 						document.body.appendChild(u.d.cover_adv.adv);
 						var s=document.createElement("script");
 						s.type="text/javascript";
-						s.innerHTML="(window.slotbydup = window.slotbydup || []).push({id: \"u6625542\",container: \"_xccq1c3vse\",async: true});";
+						s.innerHTML="(window.slotbydup = window.slotbydup || []).push({id: \"u6658271\",container: \"_xccq1c3vse\",async: true});";
 						u.d.cover_adv.adv.appendChild(s);
 					}
 				},60000)
